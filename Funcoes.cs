@@ -30,7 +30,7 @@ namespace Anoteitor
                 // _Caminho = @"E:\Temp\Anoteitor\Anoteitor.ini";
                 // _Caminho = @"H:\Anoteitor\Anoteitor.ini";
                 // _Caminho = @"F:\Temp\Anoteitor\Anoteitor.ini";
-                 _Caminho = @"C:\Anoteitor\Anoteitor.ini";
+                _Caminho = @"C:\Anoteitor\Anoteitor.ini";
 #else
                 _Caminho = Path.ChangeExtension(Application.ExecutablePath, ".ini");
 #endif

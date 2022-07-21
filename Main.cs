@@ -93,6 +93,7 @@ namespace Anoteitor
 #else
             cIni = new INI();
 #endif
+            VeSeTemIni();
             this.Logar = cIni.ReadBool("Config", "Log", false);
             int X = cIni.ReadInt("Config", "X", 0);
             Rectangle ret;
@@ -110,6 +111,21 @@ namespace Anoteitor
                 StartPosition = FormStartPosition.Manual;
             }
             Bounds = ret;
+        }
+
+        private void VeSeTemIni()
+        {
+            if (!File.Exists(cIni.FileName))
+            {
+                this.PastaGeral = Application.StartupPath;
+                cIni.WriteBool("Projetos", "SalvarAut", true);
+                cIni.WriteString("Projetos", "Pasta", this.PastaGeral);
+                cIni.WriteBool("Projetos", "CopiaOutroDia", true);
+                cIni.WriteInt("Projetos", "Segundos", 2);
+                cIni.WriteBool("Projetos", "MedeTempos", true);
+                cIni.WriteInt("Projetos", "LimArqs", 30);
+                cIni.WriteBool("Config", "Log", false);
+            }
         }
 
         private void Main_Load(object sender, EventArgs e)

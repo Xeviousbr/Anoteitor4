@@ -9,7 +9,7 @@ namespace Anoteitor
 
     public class INI
     {
-        private string FileName;
+        public string FileName;
 
         #region Constructors
             public INI(string filename)
