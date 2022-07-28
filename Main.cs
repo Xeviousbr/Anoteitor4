@@ -496,6 +496,8 @@ namespace Anoteitor
             Mensagem frmMensagem = new Mensagem();
             frmMensagem.Titulo = this.SUbAtual;
             frmMensagem.Tipo = "Sub Tarefa";
+            string PastaAtual = this.PastaGeral + @"\" + this.Atual;
+            frmMensagem.PastaAtual = PastaAtual;
             frmMensagem.ShowDialog();
         }
 

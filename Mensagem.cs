@@ -20,11 +20,17 @@ namespace Anoteitor
 
         public string Titulo { get; internal set; }
         public string Tipo { get; internal set; }
+        public string PastaAtual { get; internal set; }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Não tem o recurso ainda");
-            //    // https://imasters.com.br/back-end/c-compactando-e-descompactando-diretorios#:~:text=Se%20voc%C3%AA%20precisar%20compactar%20e,para%20compactar%20e%20descompactar%20streams.
+            if (checkBox1.Checked)
+            {
+                string PastaSub = PastaAtual + @"\" + Titulo;
+                string ArqZip = PastaAtual + @"\" + Titulo + ".zip";
+                ZipFile.CreateFromDirectory(PastaSub, ArqZip);                
+            }
+            Close();
         }
 
         private void Mensagem_Activated(object sender, EventArgs e)
