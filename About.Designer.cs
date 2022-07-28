@@ -49,7 +49,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(274, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(305, 13);
+            this.label2.Size = new System.Drawing.Size(317, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Bloco de nota para Atividades baseado no Anoteitor te Luis Perez";
             // 
@@ -88,10 +88,10 @@
             this.controlSimplyGoodCodeLinkLabel.AutoSize = true;
             this.controlSimplyGoodCodeLinkLabel.Location = new System.Drawing.Point(274, 212);
             this.controlSimplyGoodCodeLinkLabel.Name = "controlSimplyGoodCodeLinkLabel";
-            this.controlSimplyGoodCodeLinkLabel.Size = new System.Drawing.Size(284, 13);
+            this.controlSimplyGoodCodeLinkLabel.Size = new System.Drawing.Size(243, 13);
             this.controlSimplyGoodCodeLinkLabel.TabIndex = 5;
             this.controlSimplyGoodCodeLinkLabel.TabStop = true;
-            this.controlSimplyGoodCodeLinkLabel.Text = "http://forum.intonses.com.br/viewtopic.php?f=43&t=292840";
+            this.controlSimplyGoodCodeLinkLabel.Text = "http://intonses.com/viewtopic.php?f=43&t=292840";
             this.controlSimplyGoodCodeLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.controlSimplyGoodCodeLinkLabel_LinkClicked);
             // 
             // label4

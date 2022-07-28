@@ -1764,37 +1764,12 @@ namespace Anoteitor
                 this.Cursor = Cursors.WaitCursor;
                 string NomeAtividade = cProj.getNomeAtividade();
                 Fun.Renomeia(this.PastaGeral, @"\" + this.Atual, @"\" + NomeAtividade);
-                DirectoryInfo info = new DirectoryInfo(this.PastaGeral + @"\" + NomeAtividade);
-                DirectoryInfo[] Pastas = info.GetDirectories();
-                foreach (DirectoryInfo Pasta in Pastas)
-                {
-                    DirectoryInfo PastasSub = new DirectoryInfo(Pasta.FullName);
-                    FileInfo[] arquivos = PastasSub.GetFiles();
-                    foreach (FileInfo arquivo in arquivos)
-                    {
-                        string Novo = arquivo.FullName.Replace(this.Atual, NomeAtividade);
-                        File.Move(arquivo.FullName, Novo);
-                    }
-                }
-
                 int Nr = Fun.NumePeloNomeAtividade(ref this.cIni, this.Atual);
                 if (Nr>-1)
                 {
                     string nmProjeto = "Pro" + Nr.ToString();
                     this.cIni.WriteString("NmProjetos", nmProjeto, NomeAtividade);
                 }
-                //int Qtd = this.cIni.ReadInt("Projetos", "Qtd", 0);
-                //for (int i = 0; i < Qtd; i++)
-                //{
-                //    string nmProjeto = "Pro" + (i + 1).ToString();
-                //    string Nome = this.cIni.ReadString("NmProjetos", nmProjeto, "");
-                //    if (Nome == this.Atual)
-                //    {
-                //        this.cIni.WriteString("NmProjetos", nmProjeto, NomeAtividade);
-                //        break;
-                //    }
-                //}
-
                 PreencheCombo(NomeAtividade);
                 this.Filename = this.Filename.Replace(this.Atual, NomeAtividade);
                 this.Save();
@@ -1802,6 +1777,7 @@ namespace Anoteitor
                 cIni.WriteString("Projetos", "Atual", NomeAtividade);
                 controlContentTextBox.Text = Texto;
                 this.Cursor = Cursors.Default;
+                this.Atual = NomeAtividade;
             }
         }
 
