@@ -12,42 +12,40 @@ namespace Anoteitor
 {
     public partial class Main : Form
     {
-        private string TitAplicativo = "Anoteitor";
-        private bool _LastMatchCase;
-        private bool _LastSearchDown;
         private bool SalvarAutom = false;
         private bool HojeVazio = false;
         private bool FonteComErro = false;
+        private bool _Carregado = false;
+        private bool Logar = false;
+        private bool _LastMatchCase;
+        private bool _LastSearchDown;
+        private bool _IsDirty;
+        private bool MedeTempos = false;
+        private bool NovaTarefa = false;
         private int DataSalva;
         private int QtdCarac = 0;
         private int Segundos = 2;
+        private int QtMinutos = 0;
+        private int QtMinutosEsse = 0;
         private long Tick = 0;
-        private bool _IsDirty;
-        private bool _Carregado = false;
+        private string TitAplicativo = "Anoteitor";        
         private string _LastSearchText;
         private string _Filename;
         private string _NomeArq;
         private string _PastaGeral="";
         private string Atual;
-        private string AtualAnt;
-        private cEscolhido Escolhido = null;
+        private string AtualAnt;        
         private string cbArquivosOld = "";
         private string NomeLog = "";
-
-        private int QtMinutos = 0;
-        private int QtMinutosEsse = 0;
-
+        private string SUbAtual = "";
+        private string cbArquivosSUbOld = "";
+        private cEscolhido Escolhido = null;
+        private INI cIni;
         private FindDialog _FindDialog;
         private ReplaceDialog _ReplaceDialog;
         private Encoding _encoding = Encoding.ASCII;
-        private PageSettings _PageSettings;
-        private INI cIni;
-        private bool Logar = false;
-
-        private string SUbAtual = "";
-        private string cbArquivosSUbOld = "";
-        private bool MedeTempos = false;
-
+        private PageSettings _PageSettings;        
+        
         public string PastaGeral
         {
             get
@@ -196,7 +194,16 @@ namespace Anoteitor
             } else
             {
                 int DataAgora = Fun.Agora().DayOfYear;
+                bool Entrar = false;
                 if (DataAgora > this.DataSalva)
+                    Entrar = true;
+                else
+                    if (NovaTarefa)
+                    {
+                        Entrar = true;
+                        NovaTarefa = false;
+                    }
+                if (Entrar)
                 {
                     string sData = Fun.Agora().ToShortDateString();
                     string Data = sData.Replace(@"/", "-");
@@ -1213,8 +1220,9 @@ namespace Anoteitor
                     int pos = cbProjetos.FindString(Atual);
                     cbProjetos.SelectedIndex = pos;
                 }
-                this.Escolhido.Nome = "";
+                Escolhido.Nome = "";
                 IsDirty = true;
+                NovaTarefa = true;
             }
             this.CarregaArquivoDoProjeto(true);
         }
