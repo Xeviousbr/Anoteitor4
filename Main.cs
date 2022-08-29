@@ -505,7 +505,23 @@ namespace Anoteitor
             frmMensagem.Tipo = "Sub Tarefa";
             string PastaAtual = this.PastaGeral + @"\" + this.Atual;
             frmMensagem.PastaAtual = PastaAtual;
+            frmMensagem.Atual = this.Atual;
+            int QtdSub = cIni.ReadInt(this.Atual, "QtdSub", 0);
+            frmMensagem.QtdSub = QtdSub;
             frmMensagem.ShowDialog();
+            if (frmMensagem.DialogResult == DialogResult.OK)            
+            {
+                cbSubprojeto.SelectedIndex = 0;
+                this.SUbAtual = "GERAL";
+                if ((QtdSub - 1)>0)
+                {
+                    MotraArqSub(QtdSub);
+                } else
+                {
+                    cbSubprojeto.Visible = false;
+                    apagarToolStripMenuItem.Enabled = false;
+                }                
+            }
         }
 
         #endregion
@@ -1719,7 +1735,6 @@ namespace Anoteitor
                     this.Filename = NomeDoArquivo(Data);
                     this.Open(this.Filename);
                     this.cbArquivosSUbOld = this.SUbAtual;
-
                     string PastaSubAtual = "";
                     if (this.SUbAtual == "GERAL")
                         renomearToolStripMenuItem.Enabled = false;
@@ -1728,6 +1743,7 @@ namespace Anoteitor
                         PastaSubAtual = @"\" + this.SUbAtual;
                         renomearToolStripMenuItem.Enabled = true;
                     }
+                    apagarToolStripMenuItem.Enabled = renomearToolStripMenuItem.Enabled;
                     string PastaSub = this.PastaGeral + @"\" + this.Atual + PastaSubAtual;
                     if (cIni.ReadBool("Projetos", "CopiaOutroDia", false))
                         this.HojeVazio = true;

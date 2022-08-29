@@ -410,7 +410,6 @@
             // 
             // apagarToolStripMenuItem
             // 
-            this.apagarToolStripMenuItem.Enabled = false;
             this.apagarToolStripMenuItem.Name = "apagarToolStripMenuItem";
             this.apagarToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.apagarToolStripMenuItem.Text = "Apagar";
