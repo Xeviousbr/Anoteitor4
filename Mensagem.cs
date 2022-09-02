@@ -66,14 +66,13 @@ namespace Anoteitor
             {
                 string nmSubAtiv = "Sub" + i.ToString();
                 string Sub = cIni.ReadString(Atual, nmSubAtiv, "");
-                if (Achou == false)
-                    if (Sub == Titulo)
-                        Achou = true;
-                else
+                if (Achou)
                 {
                     nmSubAtiv = "Sub" + (i - 1).ToString();
                     cIni.WriteString(Atual, nmSubAtiv, Sub);
-                }
+                } else
+                    if (Sub == Titulo)
+                        Achou = true;
             }
             cIni.WriteString(Atual, ("Sub" + QtdSub.ToString()), "");
             cIni.WriteInt(Atual, "QtdSub", QtdSub - 1);
