@@ -18,23 +18,100 @@ namespace Anoteitor
 
         public string Atual { get; internal set; }
         public int QtdSub { get; internal set; }
+        public string PastaGeral { get; internal set; }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TiraDoIni();
-            string PastaSub = PastaAtual + @"\" + Titulo;
+            string PastaSub = "";
+            string ArqZip = "";
+            if (Tipo == "Tarefa")
+            {
+                TiraDoIni();
+                PastaSub = PastaAtual;
+                ArqZip = PastaGeral + @"\" + Titulo + ".zip";
+            } else
+            {
+                TiraDoIniSub();
+                PastaSub = PastaAtual + @"\" + Titulo;
+                ArqZip = PastaAtual + @"\" + Titulo + ".zip";
+            }
             if (checkBox1.Checked)
             {
-                string ArqZip = PastaAtual + @"\" + Titulo + ".zip";
+                this.Text = "Compactando..";
                 ZipFile.CreateFromDirectory(PastaSub, ArqZip);
             }
+            this.Text = "Apagando..";
             DirectoryInfo info = new DirectoryInfo(PastaSub);
             FileInfo[] arquivos = info.GetFiles();
             button1.Visible = false;
-            button2.Visible = false;
-            progressBar1.Maximum = arquivos.Length;
+            button2.Visible = false;            
             progressBar1.Visible = true;
             progressBar1.Enabled = true;
+            if (Tipo == "Tarefa")
+            {
+                ApagaTarefa();
+            } else
+            {
+                ApagaSub(arquivos, PastaSub);
+            }                
+            progressBar1.Enabled = false;
+            progressBar1.Visible = false;
+            this.DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void ApagaTarefa()
+        {
+            DirectoryInfo info = new DirectoryInfo(PastaAtual);
+            DirectoryInfo[] Dirs = info.GetDirectories();
+            int Cont = 0;
+            foreach (DirectoryInfo Dir in Dirs)
+            {
+                Cont++;
+                Cont += Dir.GetFiles().Length;
+            }
+            int Max = Cont + 1;
+            progressBar1.Maximum = Max;
+            Cont = 0;
+            // DELEÇÃO
+            foreach (FileInfo Arq in info.GetFiles())
+            {
+                File.Delete(Arq.FullName);
+                Cont++;
+                if (Cont < Max)
+                {
+                    progressBar1.Value = Cont;
+                }
+            }
+            foreach (DirectoryInfo Dir in Dirs)
+            {                
+                if (Dir.GetFiles().Length>0)
+                {
+                    foreach (FileInfo Arq in Dir.GetFiles())
+                    {
+                        File.Delete(Arq.FullName);
+                        Cont++;
+                        if (Cont< Max)
+                        {
+                            progressBar1.Value = Cont;
+                        }
+                    }
+                    Dir.Delete();
+                }
+            }
+            try
+            {
+                info.Delete();
+            }
+            catch (Exception)
+            {
+                // Não faz nada, mas deveria informar no log
+            }            
+        }
+
+        private void ApagaSub(FileInfo[] arquivos, string PastaSub)
+        {
+            progressBar1.Maximum = arquivos.Length;
             int Cont = 0;
             foreach (FileInfo arquivo in arquivos)
             {
@@ -49,14 +126,35 @@ namespace Anoteitor
             catch (Exception)
             {
                 // Não faz nada
-            }            
-            progressBar1.Enabled = false;
-            progressBar1.Visible = false;
-            this.DialogResult = DialogResult.OK;
-            Close();
+            }
+
         }
 
         private void TiraDoIni()
+        {
+            INI cIni;
+            Funcoes Fun = new Funcoes();
+            cIni = new INI(Fun.Caminho());
+            bool Achou = false;
+            int Qtd = cIni.ReadInt("Projetos", "Qtd", 0);
+            for (int i = 1; i < (Qtd + 1); i++)
+            {
+                string nmAtiv = "Pro" + i.ToString();
+                string Ativ = cIni.ReadString("NmProjetos", nmAtiv, "");
+                if (Achou)
+                {
+                    nmAtiv = "Pro" + (i - 1).ToString();
+                    cIni.WriteString("NmProjetos", nmAtiv, Ativ);
+                }
+                else
+                    if (Ativ == Titulo)
+                    Achou = true;
+            }
+            cIni.WriteInt("Projetos", "Qtd", Qtd - 1);
+        }
+
+
+        private void TiraDoIniSub()
         {
             INI cIni;
             Funcoes Fun = new Funcoes();

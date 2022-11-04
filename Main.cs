@@ -1805,6 +1805,28 @@ namespace Anoteitor
             }
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Mensagem frmMensagem = new Mensagem();
+            frmMensagem.Titulo = this.Atual;
+            frmMensagem.Tipo = "Tarefa";
+            string PastaAtual = this.PastaGeral + @"\" + this.Atual;
+            frmMensagem.PastaAtual = PastaAtual;
+            frmMensagem.Atual = this.Atual;
+            frmMensagem.PastaGeral = this.PastaGeral;
+            frmMensagem.ShowDialog();
+            if (frmMensagem.DialogResult == DialogResult.OK)
+            {
+                toolStripStatusLabel1.Text = "Tarefa " + this.Atual + " foi apagada";
+                cbProjetos.SelectedIndex = 0;
+                this.Atual = cbProjetos.Text;
+                PreencheCombo(this.Atual);
+                cIni.WriteString("Projetos", "Atual", cbProjetos.Text);
+                this.CarregaArquivoDoProjeto(true);
+                this.MostraArquivosDoProjeto();
+            }
+        }
+
         #endregion
 
     }

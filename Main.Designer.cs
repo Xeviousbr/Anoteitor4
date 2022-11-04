@@ -67,6 +67,7 @@
             this.renomearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apagarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renomearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.configurarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarSóDoDiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -370,6 +371,7 @@
             this.novoToolStripMenuItem,
             this.subAtividadesToolStripMenuItem,
             this.renomearToolStripMenuItem1,
+            this.toolStripMenuItem1,
             this.configurarToolStripMenuItem,
             this.mostrarSóDoDiaToolStripMenuItem,
             this.temposToolStripMenuItem});
@@ -421,6 +423,13 @@
             this.renomearToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.renomearToolStripMenuItem1.Text = "Renomear";
             this.renomearToolStripMenuItem1.Click += new System.EventHandler(this.renomearToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
+            this.toolStripMenuItem1.Text = "Apagar";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // configurarToolStripMenuItem
             // 
@@ -613,6 +622,7 @@
         private System.Windows.Forms.ToolStripMenuItem renomearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renomearToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem apagarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 
