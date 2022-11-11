@@ -96,7 +96,7 @@
             this.controlContentTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlContentTextBox.HideSelection = false;
             this.controlContentTextBox.Location = new System.Drawing.Point(0, 24);
-            this.controlContentTextBox.Margin = new System.Windows.Forms.Padding(10);
+            this.controlContentTextBox.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
             this.controlContentTextBox.MaxLength = 0;
             this.controlContentTextBox.Multiline = true;
             this.controlContentTextBox.Name = "controlContentTextBox";
@@ -392,6 +392,7 @@
             this.novaToolStripMenuItem,
             this.renomearToolStripMenuItem,
             this.apagarToolStripMenuItem});
+            this.subAtividadesToolStripMenuItem.Enabled = false;
             this.subAtividadesToolStripMenuItem.Name = "subAtividadesToolStripMenuItem";
             this.subAtividadesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.subAtividadesToolStripMenuItem.Text = "SubAtividades";
@@ -419,6 +420,7 @@
             // 
             // renomearToolStripMenuItem1
             // 
+            this.renomearToolStripMenuItem1.Enabled = false;
             this.renomearToolStripMenuItem1.Name = "renomearToolStripMenuItem1";
             this.renomearToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.renomearToolStripMenuItem1.Text = "Renomear";
@@ -426,6 +428,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.toolStripMenuItem1.Text = "Apagar";
@@ -440,6 +443,7 @@
             // 
             // mostrarSóDoDiaToolStripMenuItem
             // 
+            this.mostrarSóDoDiaToolStripMenuItem.Enabled = false;
             this.mostrarSóDoDiaToolStripMenuItem.Name = "mostrarSóDoDiaToolStripMenuItem";
             this.mostrarSóDoDiaToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.mostrarSóDoDiaToolStripMenuItem.Text = "Mostrar só do dia";
@@ -447,6 +451,7 @@
             // 
             // temposToolStripMenuItem
             // 
+            this.temposToolStripMenuItem.Enabled = false;
             this.temposToolStripMenuItem.Name = "temposToolStripMenuItem";
             this.temposToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.temposToolStripMenuItem.Text = "Tempos";

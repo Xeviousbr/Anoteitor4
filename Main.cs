@@ -176,7 +176,7 @@ namespace Anoteitor
         {
             Console.WriteLine("timer1_Tick");
             this.timer1.Enabled = false;
-            Console.WriteLine("Nome.Length = " + this.Escolhido.Nome.Length.ToString());
+            Console.WriteLine("Nome.Length = " + Escolhido.Nome.Length.ToString());
             if (this.Escolhido.usado == false)
             {
                 if (this.Escolhido.Nome.Length > 0)
@@ -571,7 +571,9 @@ namespace Anoteitor
                 string Pasta = this.PastaGeral + @"\" + Atual + SubAtiv;
                 if (Directory.Exists(Pasta) == false)
                     Directory.CreateDirectory(Pasta);
-                File.WriteAllText(Filename, Content);
+                string[] Parts = Filename.Split('\\');
+                string Arq = Pasta + @"\" + Parts[Parts.Length - 1];
+                File.WriteAllText(Arq, Content);
                 IsDirty = false;
                 this.Loga("Arquivo " + Filename + " salvo " + Tam.ToString() + " bytes");
                 String HoraSalva = Fun.Agora().ToString(@"hh\:mm\:ss");
@@ -1227,7 +1229,7 @@ namespace Anoteitor
             }
             Projeto cPro = new Projeto();
             cPro.ShowDialog();
-            this.Atual = cIni.ReadString("Projetos", "Atual", "");
+            Atual = cIni.ReadString("Projetos", "Atual", "");
             if (cPro.DialogResult == DialogResult.OK)
             {
                 PreencheCombo(Atual);
@@ -1236,7 +1238,14 @@ namespace Anoteitor
                     int pos = cbProjetos.FindString(Atual);
                     cbProjetos.SelectedIndex = pos;
                 }
+
+                //string sData = Fun.Agora().ToShortDateString();
+                //string Data = sData.Replace(@"/", "-");
+                //Escolhido.usado = true;
+                //Escolhido.Nome = this.PastaGeral + @"\" + this.Atual + @"\" + this.Atual + "^" + Data + ".txt";
+                Escolhido.usado = true;
                 Escolhido.Nome = "";
+
                 IsDirty = true;
                 NovaTarefa = true;
             }
@@ -1444,8 +1453,8 @@ namespace Anoteitor
                                     if (data > MaisRecente)
                                     {
                                         MaisRecente = data;
-                                        this.Escolhido.Nome = arquivo.FullName;
-                                        this.Escolhido.usado = false;
+                                        Escolhido.Nome = arquivo.FullName;
+                                        Escolhido.usado = false;
                                     }
                             }
                     }
@@ -1502,7 +1511,7 @@ namespace Anoteitor
             this.Loga("Carregado = " + this.Carregado.ToString());
             if (this.Carregado)
             {
-                this.Loga("cbArquivos.Text = " + cbArquivos.Text);
+                Loga("cbArquivos.Text = " + cbArquivos.Text);
                 if (cbArquivos.Text.Length > 0)
                 {                    
                     if (cbArquivos.Text == "TUDO")
@@ -1525,11 +1534,11 @@ namespace Anoteitor
                     else
                         if (cbArquivos.Text != this.cbArquivosOld)
                     {
-                        this.Filename = NomeDoArquivo(cbArquivos.Text);
-                        this.Open(this.Filename);
-                        this.cbArquivosOld = cbArquivos.Text;
+                        Filename = NomeDoArquivo(cbArquivos.Text);
+                        Open(this.Filename);
+                        cbArquivosOld = cbArquivos.Text;
                     }
-                    if (this.Atual != this.AtualAnt)
+                    if (Atual != this.AtualAnt)
                     {
                         this.AtualAnt = this.Atual;
                         VeSeTemSub(Atual);
