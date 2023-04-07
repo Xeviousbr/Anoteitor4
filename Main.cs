@@ -37,7 +37,7 @@ namespace Anoteitor
         private string AtualAnt;        
         private string cbArquivosOld = "";
         private string NomeLog = "";
-        private string SUbAtual = "";
+        private string _SUbAtual = "";
         private string cbArquivosSUbOld = "";
         private cEscolhido Escolhido = null;
         private INI cIni;
@@ -57,6 +57,22 @@ namespace Anoteitor
                 var oldvalue = value;
                 _PastaGeral = value;
                 OnFilenameChanged(oldvalue, value);
+            }
+        }
+
+        private string SUbAtual
+        {
+            get
+            {
+                if (_SUbAtual == "GERAL")
+                {
+                    return "";
+                }
+                return _SUbAtual;
+            }
+            set
+            {
+                _SUbAtual = value;
             }
         }
 
@@ -152,6 +168,11 @@ namespace Anoteitor
             {
                 this.CarregaArquivoDoProjeto(false);
                 this.MostraArquivosDoProjeto();
+                renomearToolStripMenuItem1.Enabled = true;
+                toolStripMenuItem1.Enabled = true;
+            } else
+            {
+                subAtividadesToolStripMenuItem.Enabled = false;
             }
             this.SalvarAutom = cIni.ReadBool("Projetos", "SalvarAut", false);
             this.cbProjetos.Text = this.Atual;
@@ -1238,16 +1259,13 @@ namespace Anoteitor
                     int pos = cbProjetos.FindString(Atual);
                     cbProjetos.SelectedIndex = pos;
                 }
-
-                //string sData = Fun.Agora().ToShortDateString();
-                //string Data = sData.Replace(@"/", "-");
-                //Escolhido.usado = true;
-                //Escolhido.Nome = this.PastaGeral + @"\" + this.Atual + @"\" + this.Atual + "^" + Data + ".txt";
                 Escolhido.usado = true;
                 Escolhido.Nome = "";
-
                 IsDirty = true;
                 NovaTarefa = true;
+                subAtividadesToolStripMenuItem.Enabled = true;
+                renomearToolStripMenuItem1.Enabled = true;
+
             }
             this.CarregaArquivoDoProjeto(true);
         }
@@ -1293,7 +1311,10 @@ namespace Anoteitor
             if (QtdSub > 0)
                 this.MotraArqSub(QtdSub);
             else
+            {
                 cbSubprojeto.Visible = false;
+                renomearToolStripMenuItem1.Enabled = false;
+            }                
         }
 
         private void MotraArqSub(int QtdSub)
@@ -1345,7 +1366,8 @@ namespace Anoteitor
                 }
                 
             }
-            if (this.SUbAtual == "GERAL")
+            if (this.SUbAtual == "")
+            // if (this.SUbAtual == "GERAL")
             {
                 renomearToolStripMenuItem.Enabled = false;
                 cbSubprojeto.SelectedIndex = cbSubprojeto.FindStringExact("GERAL");
@@ -1398,22 +1420,13 @@ namespace Anoteitor
         private void MostraArquivosDoProjeto()
         {
             int QtdSub = this.cIni.ReadInt(this.Atual, "QtdSub", 0);
-            string PastaSub = "";
             if (QtdSub > 0)
             {
-                string SubStual = cIni.ReadString(this.Atual, "SubAtual", "");
-                if (SubStual == "GERAL")
-                    renomearToolStripMenuItem.Enabled = false;
-                else
-                {
-                    PastaSub = @"\" + SubStual;
-                    renomearToolStripMenuItem.Enabled = true;
-                }                    
                 this.MotraArqSub(QtdSub);
             } else
                 renomearToolStripMenuItem.Enabled = false;
             apagarToolStripMenuItem.Enabled = renomearToolStripMenuItem.Enabled;
-            this.PreparaComboArquivo(this.PastaGeral + @"\" + this.Atual + PastaSub);
+            this.PreparaComboArquivo(this.PastaGeral + @"\" + this.Atual + @"\" + this.SUbAtual);            
         }
 
         private DateTime GetDataPeloNome(string Nome)
@@ -1516,7 +1529,8 @@ namespace Anoteitor
                 {                    
                     if (cbArquivos.Text == "TUDO")
                     {
-                        string Pasta = this.PastaGeral + @"\" + this.Atual;
+                        string Pasta = this.PastaGeral + @"\" + this.Atual + @"\" + this.SUbAtual;
+                        // string Pasta = this.PastaGeral + @"\" + this.Atual + PastaSub;
                         cbArquivos.Items.Clear();
                         DirectoryInfo info = new DirectoryInfo(Pasta);
                         FileInfo[] arquivos = info.GetFiles().OrderBy(p => p.CreationTime).ToArray();
@@ -1551,13 +1565,13 @@ namespace Anoteitor
         {
             string nmSUb = "";
             string dirSub = "";
-            this.SUbAtual = cIni.ReadString(this.Atual, "SubAtual", "");
-            if (this.SUbAtual.Length > 0)
+            this._SUbAtual = cIni.ReadString(this.Atual, "SubAtual", "");
+            if (this._SUbAtual.Length > 0)
             {
-                if (this.SUbAtual != "GERAL")
+                if (this._SUbAtual != "GERAL")
                 {
-                    nmSUb = this.SUbAtual + "^";
-                    dirSub = @"\" + this.SUbAtual;
+                    nmSUb = this._SUbAtual + "^";
+                    dirSub = @"\" + this._SUbAtual;
                 }
             }
             string Pasta = this.PastaGeral + @"\" + this.Atual + dirSub;
@@ -1745,7 +1759,9 @@ namespace Anoteitor
                     this.Open(this.Filename);
                     this.cbArquivosSUbOld = this.SUbAtual;
                     string PastaSubAtual = "";
-                    if (this.SUbAtual == "GERAL")
+                    if (this.SUbAtual == "")
+
+
                         renomearToolStripMenuItem.Enabled = false;
                     else
                     {
@@ -1813,7 +1829,7 @@ namespace Anoteitor
                 this.Atual = NomeAtividade;
             }
         }
-
+        
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Mensagem frmMensagem = new Mensagem();
