@@ -36,9 +36,10 @@
             // 
             // txSub
             // 
+            this.txSub.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txSub.Location = new System.Drawing.Point(15, 51);
             this.txSub.Name = "txSub";
-            this.txSub.Size = new System.Drawing.Size(209, 20);
+            this.txSub.Size = new System.Drawing.Size(209, 23);
             this.txSub.TabIndex = 4;
             this.txSub.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txSub_KeyPress);
             // 

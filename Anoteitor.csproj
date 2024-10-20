@@ -216,6 +216,9 @@
     <EmbeddedResource Include="SaveChangesPrompt.resx">
       <DependentUpon>SaveChangesPrompt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SubAtividade.resx">
+      <DependentUpon>SubAtividade.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tempos.resx">
       <DependentUpon>Tempos.cs</DependentUpon>
     </EmbeddedResource>

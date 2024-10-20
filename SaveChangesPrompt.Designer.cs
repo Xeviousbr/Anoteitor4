@@ -68,14 +68,16 @@
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
+            this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMessage.Location = new System.Drawing.Point(12, 12);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(195, 13);
+            this.labelMessage.Size = new System.Drawing.Size(261, 17);
             this.labelMessage.TabIndex = 2;
             this.labelMessage.Text = "Tem certeza que quer salvar o arquivo?";
             // 
             // lbNome
             // 
+            this.lbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNome.Location = new System.Drawing.Point(13, 38);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(329, 41);

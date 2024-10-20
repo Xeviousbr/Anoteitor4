@@ -86,9 +86,9 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.controlDownRadioButton);
             this.groupBox1.Controls.Add(this.controlUpRadioButton);
-            this.groupBox1.Location = new System.Drawing.Point(115, 42);
+            this.groupBox1.Location = new System.Drawing.Point(70, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(145, 47);
+            this.groupBox1.Size = new System.Drawing.Size(190, 47);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Direção";
@@ -97,7 +97,7 @@
             // 
             this.controlDownRadioButton.AutoSize = true;
             this.controlDownRadioButton.Checked = true;
-            this.controlDownRadioButton.Location = new System.Drawing.Point(51, 19);
+            this.controlDownRadioButton.Location = new System.Drawing.Point(108, 19);
             this.controlDownRadioButton.Name = "controlDownRadioButton";
             this.controlDownRadioButton.Size = new System.Drawing.Size(76, 17);
             this.controlDownRadioButton.TabIndex = 1;
@@ -120,9 +120,10 @@
             // 
             this.controlTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlTextBox.Location = new System.Drawing.Point(78, 16);
             this.controlTextBox.Name = "controlTextBox";
-            this.controlTextBox.Size = new System.Drawing.Size(182, 20);
+            this.controlTextBox.Size = new System.Drawing.Size(182, 23);
             this.controlTextBox.TabIndex = 1;
             this.controlTextBox.TextChanged += new System.EventHandler(this.controlTextBox_TextChanged);
             this.controlTextBox.Enter += new System.EventHandler(this.controlTextBox_Enter);

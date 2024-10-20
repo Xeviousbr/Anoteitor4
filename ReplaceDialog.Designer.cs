@@ -84,7 +84,7 @@
             this.labelFindWhat.AutoSize = true;
             this.labelFindWhat.Location = new System.Drawing.Point(4, 16);
             this.labelFindWhat.Name = "labelFindWhat";
-            this.labelFindWhat.Size = new System.Drawing.Size(56, 13);
+            this.labelFindWhat.Size = new System.Drawing.Size(65, 13);
             this.labelFindWhat.TabIndex = 1;
             this.labelFindWhat.Text = "Procurar por";
             // 
@@ -92,9 +92,10 @@
             // 
             this.controlFindWhatTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlFindWhatTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlFindWhatTextBox.Location = new System.Drawing.Point(82, 12);
             this.controlFindWhatTextBox.Name = "controlFindWhatTextBox";
-            this.controlFindWhatTextBox.Size = new System.Drawing.Size(165, 20);
+            this.controlFindWhatTextBox.Size = new System.Drawing.Size(165, 23);
             this.controlFindWhatTextBox.TabIndex = 2;
             this.controlFindWhatTextBox.TextChanged += new System.EventHandler(this.controlFindWhatTextBox_TextChanged);
             this.controlFindWhatTextBox.Enter += new System.EventHandler(this.controlFindWhatTextBox_Enter);
@@ -103,9 +104,10 @@
             // 
             this.controlReplaceWithTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlReplaceWithTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlReplaceWithTextBox.Location = new System.Drawing.Point(82, 42);
             this.controlReplaceWithTextBox.Name = "controlReplaceWithTextBox";
-            this.controlReplaceWithTextBox.Size = new System.Drawing.Size(165, 20);
+            this.controlReplaceWithTextBox.Size = new System.Drawing.Size(165, 23);
             this.controlReplaceWithTextBox.TabIndex = 4;
             this.controlReplaceWithTextBox.Enter += new System.EventHandler(this.controlReplaceWithTextBox_Enter);
             // 
@@ -114,7 +116,7 @@
             this.labelReplaceWith.AutoSize = true;
             this.labelReplaceWith.Location = new System.Drawing.Point(4, 45);
             this.labelReplaceWith.Name = "labelReplaceWith";
-            this.labelReplaceWith.Size = new System.Drawing.Size(72, 13);
+            this.labelReplaceWith.Size = new System.Drawing.Size(56, 13);
             this.labelReplaceWith.TabIndex = 3;
             this.labelReplaceWith.Text = "Trocar por";
             // 
@@ -123,7 +125,7 @@
             this.controlMatchCaseCheckBox.AutoSize = true;
             this.controlMatchCaseCheckBox.Location = new System.Drawing.Point(7, 108);
             this.controlMatchCaseCheckBox.Name = "controlMatchCaseCheckBox";
-            this.controlMatchCaseCheckBox.Size = new System.Drawing.Size(82, 17);
+            this.controlMatchCaseCheckBox.Size = new System.Drawing.Size(53, 17);
             this.controlMatchCaseCheckBox.TabIndex = 5;
             this.controlMatchCaseCheckBox.Text = "Exato";
             this.controlMatchCaseCheckBox.UseVisualStyleBackColor = true;

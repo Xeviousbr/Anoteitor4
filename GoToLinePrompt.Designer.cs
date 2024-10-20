@@ -37,7 +37,7 @@
             this.labelLineNumber.AutoSize = true;
             this.labelLineNumber.Location = new System.Drawing.Point(12, 9);
             this.labelLineNumber.Name = "labelLineNumber";
-            this.labelLineNumber.Size = new System.Drawing.Size(68, 13);
+            this.labelLineNumber.Size = new System.Drawing.Size(88, 13);
             this.labelLineNumber.TabIndex = 0;
             this.labelLineNumber.Text = "Numero da Linha";
             // 
@@ -45,9 +45,10 @@
             // 
             this.controlLineNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.controlLineNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlLineNumberTextBox.Location = new System.Drawing.Point(12, 25);
             this.controlLineNumberTextBox.Name = "controlLineNumberTextBox";
-            this.controlLineNumberTextBox.Size = new System.Drawing.Size(216, 20);
+            this.controlLineNumberTextBox.Size = new System.Drawing.Size(216, 23);
             this.controlLineNumberTextBox.TabIndex = 1;
             this.controlLineNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.controlLineNumberTextBox_KeyPress);
             // 
