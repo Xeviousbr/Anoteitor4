@@ -93,7 +93,7 @@
             this.controlContentTextBox.AcceptsTab = true;
             this.controlContentTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.controlContentTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlContentTextBox.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.controlContentTextBox.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.controlContentTextBox.HideSelection = false;
             this.controlContentTextBox.Location = new System.Drawing.Point(0, 24);
             this.controlContentTextBox.Margin = new System.Windows.Forms.Padding(10);
@@ -382,7 +382,7 @@
             // novoToolStripMenuItem
             // 
             this.novoToolStripMenuItem.Name = "novoToolStripMenuItem";
-            this.novoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.novoToolStripMenuItem.Text = "Nova";
             this.novoToolStripMenuItem.Click += new System.EventHandler(this.novoToolStripMenuItem_Click);
             // 
@@ -393,27 +393,27 @@
             this.renomearToolStripMenuItem,
             this.apagarToolStripMenuItem});
             this.subAtividadesToolStripMenuItem.Name = "subAtividadesToolStripMenuItem";
-            this.subAtividadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.subAtividadesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.subAtividadesToolStripMenuItem.Text = "SubAtividades";
             // 
             // novaToolStripMenuItem
             // 
             this.novaToolStripMenuItem.Name = "novaToolStripMenuItem";
-            this.novaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novaToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.novaToolStripMenuItem.Text = "Nova";
             this.novaToolStripMenuItem.Click += new System.EventHandler(this.novaSubAtividadeToolStripMenuItem_Click);
             // 
             // renomearToolStripMenuItem
             // 
             this.renomearToolStripMenuItem.Name = "renomearToolStripMenuItem";
-            this.renomearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.renomearToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.renomearToolStripMenuItem.Text = "Renomear";
             this.renomearToolStripMenuItem.Click += new System.EventHandler(this.renomearToolStripMenuItem_Click);
             // 
             // apagarToolStripMenuItem
             // 
             this.apagarToolStripMenuItem.Name = "apagarToolStripMenuItem";
-            this.apagarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.apagarToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.apagarToolStripMenuItem.Text = "Apagar";
             this.apagarToolStripMenuItem.Click += new System.EventHandler(this.apagarToolStripMenuItem_Click);
             // 
@@ -421,7 +421,7 @@
             // 
             this.renomearToolStripMenuItem1.Enabled = false;
             this.renomearToolStripMenuItem1.Name = "renomearToolStripMenuItem1";
-            this.renomearToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.renomearToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.renomearToolStripMenuItem1.Text = "Renomear";
             this.renomearToolStripMenuItem1.Click += new System.EventHandler(this.renomearToolStripMenuItem1_Click);
             // 
@@ -429,14 +429,14 @@
             // 
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.toolStripMenuItem1.Text = "Apagar";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // configurarToolStripMenuItem
             // 
             this.configurarToolStripMenuItem.Name = "configurarToolStripMenuItem";
-            this.configurarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configurarToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.configurarToolStripMenuItem.Text = "Configurar";
             this.configurarToolStripMenuItem.Click += new System.EventHandler(this.configurarToolStripMenuItem_Click);
             // 
@@ -444,7 +444,7 @@
             // 
             this.mostrarSóDoDiaToolStripMenuItem.Enabled = false;
             this.mostrarSóDoDiaToolStripMenuItem.Name = "mostrarSóDoDiaToolStripMenuItem";
-            this.mostrarSóDoDiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mostrarSóDoDiaToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.mostrarSóDoDiaToolStripMenuItem.Text = "Mostrar só do dia";
             this.mostrarSóDoDiaToolStripMenuItem.Click += new System.EventHandler(this.mostrarSóDoDiaToolStripMenuItem_Click);
             // 
@@ -452,7 +452,7 @@
             // 
             this.temposToolStripMenuItem.Enabled = false;
             this.temposToolStripMenuItem.Name = "temposToolStripMenuItem";
-            this.temposToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.temposToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.temposToolStripMenuItem.Text = "Tempos";
             this.temposToolStripMenuItem.Click += new System.EventHandler(this.temposToolStripMenuItem_Click);
             // 
