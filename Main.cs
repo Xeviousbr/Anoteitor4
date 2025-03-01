@@ -8,6 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+// BUSCAS
+// Chamar a tela de busca
+// Criar uma tela com Lista
+// Colocar as datas selecionadas no list
+// Colocar um inicio de linha pra cada caso
+// Tratar o duplo clique, para abrir o arquivo
+// Selecionar o texto buscado
+
 namespace Anoteitor
 {
     public partial class Main : Form
@@ -1401,7 +1409,7 @@ namespace Anoteitor
             string Data = Fun.Agora().ToShortDateString().Replace(@"/", "-");
             this.Filename = NomeDoArquivo(Data);
             this.Open(this.Filename);
-            this.Text = this.NomeArq + " - " + this.TitAplicativo;
+            this.Text = this.NomeArq + " - " + this.TitAplicativo + " " + this.Filename;
             if (controlContentTextBox.Text.Length == 0)
                 if (cIni.ReadBool("Projetos", "CopiaOutroDia", false))
                     this.HojeVazio = true;
@@ -1854,6 +1862,109 @@ namespace Anoteitor
 
         #endregion
 
+        private void procurarEmTodasDatasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string PastaSubAtual = "";
+            if (this.SUbAtual != "")
+            {
+                PastaSubAtual = @"\" + this.SUbAtual;
+            }
+            string PastaSub = this.PastaGeral + @"\" + this.Atual + PastaSubAtual;
+            FindInAllFiles(PastaSub);
+        }
+
+        private void FindInAllFiles(string PastaSub)
+        {
+            string searchText = controlContentTextBox.SelectedText;
+            if (string.IsNullOrEmpty(searchText))
+            {
+                searchText = ShowInputDialog("Busca em Todos os Arquivos", "Digite o termo que deseja buscar:");
+                if (string.IsNullOrWhiteSpace(searchText)) return;
+            }
+            string taskName = this.Atual; // Nome da tarefa atual
+            List<string> matchingFiles = Directory.GetFiles(PastaSub, $"{taskName}*")
+                .OrderBy(f => new FileInfo(f).CreationTime)
+                .ToList();
+            List<string> foundOccurrences = new List<string>();
+            foreach (var file in matchingFiles)
+            {
+                try
+                {
+                    using (StreamReader reader = new StreamReader(file))
+                    {
+                        string line;
+                        int lineNumber = 0;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            lineNumber++;
+                            if (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                foundOccurrences.Add($"[{Path.GetFileName(file)} - Linha {lineNumber}]: {line}");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erro ao ler o arquivo {file}: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            if (foundOccurrences.Count > 0)
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, foundOccurrences), "Resultados da Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Nenhuma ocorrência encontrada.", "Anoteitor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private string ShowInputDialog(string title, string promptText)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = "";
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancelar";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new System.Drawing.Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            return dialogResult == DialogResult.OK ? textBox.Text : "";
+        }
+
+        private void procurarPorTudoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Control + Alt + Shift F
+            int y = 0;
+        }
     }
 
     partial class cEscolhido

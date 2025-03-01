@@ -51,6 +51,8 @@
             this.menuitemEditDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuitemEditFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.procurarEmTodasDatasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.procurarPorTudoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuitemEditFindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.menuitemEditReplace = new System.Windows.Forms.ToolStripMenuItem();
             this.menuitemEditGoTo = new System.Windows.Forms.ToolStripMenuItem();
@@ -227,6 +229,8 @@
             this.menuitemEditDelete,
             this.toolStripSeparator6,
             this.menuitemEditFind,
+            this.procurarEmTodasDatasToolStripMenuItem,
+            this.procurarPorTudoToolStripMenuItem,
             this.menuitemEditFindNext,
             this.menuitemEditReplace,
             this.menuitemEditGoTo,
@@ -242,20 +246,20 @@
             // 
             this.menuitemEditUndo.Name = "menuitemEditUndo";
             this.menuitemEditUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.menuitemEditUndo.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditUndo.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditUndo.Text = "&Undo";
             this.menuitemEditUndo.Click += new System.EventHandler(this.menuitemEditUndo_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(271, 6);
             // 
             // menuitemEditCut
             // 
             this.menuitemEditCut.Name = "menuitemEditCut";
             this.menuitemEditCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.menuitemEditCut.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditCut.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditCut.Text = "Recortar";
             this.menuitemEditCut.Click += new System.EventHandler(this.menuitemEditCut_Click);
             // 
@@ -263,7 +267,7 @@
             // 
             this.menuitemEditCopy.Name = "menuitemEditCopy";
             this.menuitemEditCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.menuitemEditCopy.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditCopy.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditCopy.Text = "Copiar";
             this.menuitemEditCopy.Click += new System.EventHandler(this.menuitemEditCopy_Click);
             // 
@@ -271,7 +275,7 @@
             // 
             this.menuitemEditPaste.Name = "menuitemEditPaste";
             this.menuitemEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.menuitemEditPaste.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditPaste.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditPaste.Text = "Colar";
             this.menuitemEditPaste.Click += new System.EventHandler(this.menuitemEditPaste_Click);
             // 
@@ -279,28 +283,48 @@
             // 
             this.menuitemEditDelete.Name = "menuitemEditDelete";
             this.menuitemEditDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.menuitemEditDelete.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditDelete.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditDelete.Text = "Apagar";
             this.menuitemEditDelete.Click += new System.EventHandler(this.menuitemEditDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(271, 6);
             // 
             // menuitemEditFind
             // 
             this.menuitemEditFind.Name = "menuitemEditFind";
             this.menuitemEditFind.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.menuitemEditFind.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditFind.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditFind.Text = "Procurar...";
             this.menuitemEditFind.Click += new System.EventHandler(this.menuitemEditFind_Click);
+            // 
+            // procurarEmTodasDatasToolStripMenuItem
+            // 
+            this.procurarEmTodasDatasToolStripMenuItem.Name = "procurarEmTodasDatasToolStripMenuItem";
+            this.procurarEmTodasDatasToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.F)));
+            this.procurarEmTodasDatasToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
+            this.procurarEmTodasDatasToolStripMenuItem.Text = "Procurar em todas datas";
+            this.procurarEmTodasDatasToolStripMenuItem.Click += new System.EventHandler(this.procurarEmTodasDatasToolStripMenuItem_Click);
+            // 
+            // procurarPorTudoToolStripMenuItem
+            // 
+            this.procurarPorTudoToolStripMenuItem.Enabled = false;
+            this.procurarPorTudoToolStripMenuItem.Name = "procurarPorTudoToolStripMenuItem";
+            this.procurarPorTudoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.F)));
+            this.procurarPorTudoToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
+            this.procurarPorTudoToolStripMenuItem.Text = "Procurar por tudo";
+            this.procurarPorTudoToolStripMenuItem.Click += new System.EventHandler(this.procurarPorTudoToolStripMenuItem_Click);
             // 
             // menuitemEditFindNext
             // 
             this.menuitemEditFindNext.Name = "menuitemEditFindNext";
             this.menuitemEditFindNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.menuitemEditFindNext.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditFindNext.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditFindNext.Text = "Procurar Próximo...";
             this.menuitemEditFindNext.Click += new System.EventHandler(this.menuitemEditFindNext_Click);
             // 
@@ -308,7 +332,7 @@
             // 
             this.menuitemEditReplace.Name = "menuitemEditReplace";
             this.menuitemEditReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.menuitemEditReplace.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditReplace.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditReplace.Text = "Trocar";
             this.menuitemEditReplace.Click += new System.EventHandler(this.menuitemEditReplace_Click);
             // 
@@ -316,20 +340,20 @@
             // 
             this.menuitemEditGoTo.Name = "menuitemEditGoTo";
             this.menuitemEditGoTo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.menuitemEditGoTo.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditGoTo.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditGoTo.Text = "Ir para...";
             this.menuitemEditGoTo.Click += new System.EventHandler(this.menuitemEditGoTo_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(271, 6);
             // 
             // menuitemEditSelectAll
             // 
             this.menuitemEditSelectAll.Name = "menuitemEditSelectAll";
             this.menuitemEditSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.menuitemEditSelectAll.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditSelectAll.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditSelectAll.Text = "Selecionar Tudo";
             this.menuitemEditSelectAll.Click += new System.EventHandler(this.menuitemEditSelectAll_Click);
             // 
@@ -337,7 +361,7 @@
             // 
             this.menuitemEditTimeDate.Name = "menuitemEditTimeDate";
             this.menuitemEditTimeDate.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.menuitemEditTimeDate.Size = new System.Drawing.Size(200, 22);
+            this.menuitemEditTimeDate.Size = new System.Drawing.Size(274, 22);
             this.menuitemEditTimeDate.Text = "Time/&Date";
             this.menuitemEditTimeDate.Click += new System.EventHandler(this.menuitemEditTimeDate_Click);
             // 
@@ -627,6 +651,8 @@
         private System.Windows.Forms.ToolStripMenuItem renomearToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem apagarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem procurarEmTodasDatasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem procurarPorTudoToolStripMenuItem;
     }
 }
 
