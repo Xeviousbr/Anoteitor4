@@ -21,5 +21,11 @@ namespace Anoteitor {
 
             return Indexes;
         }
+
+        public static string ExtractDateFromFileName(string fileName)
+        {
+            System.Text.RegularExpressions.Match match = System.Text.RegularExpressions.Regex.Match(fileName, @"\d{2}-\d{2}-\d{4}");
+            return match.Success ? match.Value : "Data desconhecida";
+        }
     }
 }

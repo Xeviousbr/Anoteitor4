@@ -1768,8 +1768,6 @@ namespace Anoteitor
                     this.cbArquivosSUbOld = this.SUbAtual;
                     string PastaSubAtual = "";
                     if (this.SUbAtual == "")
-
-
                         renomearToolStripMenuItem.Enabled = false;
                     else
                     {
@@ -1885,7 +1883,8 @@ namespace Anoteitor
             List<string> matchingFiles = Directory.GetFiles(PastaSub, $"{taskName}*")
                 .OrderBy(f => new FileInfo(f).CreationTime)
                 .ToList();
-            List<string> foundOccurrences = new List<string>();
+            // List<string> foundOccurrences = new List<string>();
+            List<(string filePath, string displayText)> foundOccurrences = new List<(string, string)>();
             foreach (var file in matchingFiles)
             {
                 try
@@ -1899,7 +1898,10 @@ namespace Anoteitor
                             lineNumber++;
                             if (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
                             {
-                                foundOccurrences.Add($"[{Path.GetFileName(file)} - Linha {lineNumber}]: {line}");
+                                string fileName = Path.GetFileName(file);
+                                string datePart = Helper.ExtractDateFromFileName(fileName);
+                                foundOccurrences.Add((file, line));
+                                // foundOccurrences.Add($"{datePart} : {line}");
                             }
                         }
                     }
@@ -1912,13 +1914,21 @@ namespace Anoteitor
 
             if (foundOccurrences.Count > 0)
             {
-                MessageBox.Show(string.Join(Environment.NewLine, foundOccurrences), "Resultados da Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Resultados resultWindow = new Resultados(this, foundOccurrences);
+                resultWindow.StartPosition = FormStartPosition.CenterScreen;
+                resultWindow.Show();
             }
             else
             {
                 MessageBox.Show("Nenhuma ocorrência encontrada.", "Anoteitor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        //private string ExtractDateFromFileName(string fileName)
+        //{
+        //    System.Text.RegularExpressions.Match match = System.Text.RegularExpressions.Regex.Match(fileName, @"\d{2}-\d{2}-\d{4}");
+        //    return match.Success ? match.Value : "Data desconhecida";
+        //}
 
         private string ShowInputDialog(string title, string promptText)
         {

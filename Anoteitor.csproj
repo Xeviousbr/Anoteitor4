@@ -132,6 +132,12 @@
     <Compile Include="Projeto.Designer.cs">
       <DependentUpon>Projeto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resultados.designer.cs">
+      <DependentUpon>Resultados.cs</DependentUpon>
+    </Compile>
     <Compile Include="SaveOpenDialog.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Projeto.resx">
       <DependentUpon>Projeto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resultados.resx">
+      <DependentUpon>Resultados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SaveOpenDialog.resx">
       <DependentUpon>SaveOpenDialog.cs</DependentUpon>
