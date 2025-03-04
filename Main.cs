@@ -6,22 +6,16 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
-// BUSCAS
-// Chamar a tela de busca
-// Criar uma tela com Lista
-// Colocar as datas selecionadas no list
-// Colocar um inicio de linha pra cada caso
-// Tratar o duplo clique, para abrir o arquivo
-// Selecionar o texto buscado
 
 namespace Anoteitor
 {
     public partial class Main : Form
     {
         private bool SalvarAutom = false;
-        private bool HojeVazio = false;
+        private bool HojeVazio = false;        
         private bool FonteComErro = false;
         private bool _Carregado = false;
         private bool Logar = false;
@@ -47,6 +41,7 @@ namespace Anoteitor
         private string NomeLog = "";
         private string _SUbAtual = "";
         private string cbArquivosSUbOld = "";
+        private CancellationTokenSource _cts;
         private cEscolhido Escolhido = null;
         private INI cIni;
         private FindDialog _FindDialog;
@@ -497,7 +492,7 @@ namespace Anoteitor
 
             if (OpenDialog.ShowDialog(this) != DialogResult.OK) return;
 
-            Open(OpenDialog.MSDialog.FileName, OpenDialog.Encoding);
+            Open(OpenDialog.MSDialog.FileName, encoding:OpenDialog.Encoding);
         }
 
         private void menuitemFormatFont_Click(object sender, EventArgs e)
@@ -635,7 +630,7 @@ namespace Anoteitor
             return true;
         }
 
-        public void Open(string pFilename, Encoding encoding = null)
+        public void Open(string pFilename, string searchText = null, Encoding encoding = null, bool ativar=false)
         {
             var Filename = pFilename;
 
@@ -679,7 +674,23 @@ namespace Anoteitor
 #endregion
             string sTemp = ReadAllText(Filename, encoding);
             Content = sTemp;
-            SelectionStart = 0;
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                int index = Content.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
+                if (index >= 0)
+                {
+                    controlContentTextBox.SelectionStart = index;
+                    controlContentTextBox.SelectionLength = searchText.Length;
+                    if (ativar)
+                    {
+                        controlContentTextBox.Focus();
+                    }                    
+                    controlContentTextBox.ScrollToCaret();
+                }
+            } else
+            {
+                SelectionStart = 0;
+            }            
             this.Filename = Filename;
             IsDirty = false;
             toolStripStatusLabel1.Text = "";
@@ -1860,6 +1871,114 @@ namespace Anoteitor
 
         #endregion
 
+        private void procurarPorTudoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindInAllFilesRecursive(this.PastaGeral);
+        }
+
+        private async void FindInAllFilesRecursive(string baseDirectory)
+        {
+            if (string.IsNullOrWhiteSpace(Content)) return;
+
+            string searchText = controlContentTextBox.SelectedText;
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                searchText = ShowInputDialog("Busca Global", "Digite o termo que deseja buscar:");
+                if (string.IsNullOrWhiteSpace(searchText)) return;
+            }
+
+            _cts = new CancellationTokenSource(); // Criamos um novo Token de Cancelamento
+            CancellationToken token = _cts.Token; // Obtém o token para verificar o cancelamento
+
+            List<string> foundOccurrences = new List<string>();
+
+            try
+            {
+                List<string> allFiles = Directory.GetFiles(baseDirectory, "*.*", SearchOption.AllDirectories).ToList();
+                int totalFiles = allFiles.Count;
+                int processedFiles = 0;
+
+                Resultados resultWindow = null;
+
+                await Task.Run(() =>
+                {
+                    foreach (var file in allFiles)
+                    {
+                        if (token.IsCancellationRequested) // Verifica se o usuário cancelou a busca
+                        {
+                            break;
+                        }
+
+                        processedFiles++;
+                        UpdateProgress(processedFiles, totalFiles);
+
+                        try
+                        {
+                            using (StreamReader reader = new StreamReader(file))
+                            {
+                                string line;
+                                int lineNumber = 0;
+                                while ((line = reader.ReadLine()) != null)
+                                {
+                                    lineNumber++;
+                                    if (line.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                                    {
+                                        string formattedResult = $"[{file}] ➝ {line}";
+
+                                        if (resultWindow == null)
+                                        {
+                                            Invoke(new Action(() =>
+                                            {
+                                                resultWindow = new Resultados(this, new List<(string, string)> { (file, line) }, _cts);
+                                                resultWindow.StartPosition = FormStartPosition.CenterScreen;
+                                                resultWindow.Show();
+                                            }));
+                                        }
+                                        else
+                                        {
+                                            Invoke(new Action(() =>
+                                            {
+                                                resultWindow.AdicionarResultado(file, line);
+                                            }));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Invoke(new Action(() =>
+                            {
+                                MessageBox.Show($"Erro ao ler o arquivo {file}: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }));
+                        }
+                    }
+                }, token);
+
+                Invoke(new Action(() => { this.Text = "Anoteitor - Busca Concluída"; }));
+
+                if (resultWindow == null)
+                {
+                    MessageBox.Show("Nenhuma ocorrência encontrada.", "Anoteitor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao buscar arquivos: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Atualiza o título do programa com o percentual da busca
+        private void UpdateProgress(int processed, int total)
+        {
+            if (total > 0)
+            {
+                int percent = (processed * 100) / total;
+                Invoke(new Action(() => { this.Text = $"Anoteitor - Buscando... {percent}%"; }));
+            }
+        }
+
         private void procurarEmTodasDatasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string PastaSubAtual = "";
@@ -1883,7 +2002,6 @@ namespace Anoteitor
             List<string> matchingFiles = Directory.GetFiles(PastaSub, $"{taskName}*")
                 .OrderBy(f => new FileInfo(f).CreationTime)
                 .ToList();
-            // List<string> foundOccurrences = new List<string>();
             List<(string filePath, string displayText)> foundOccurrences = new List<(string, string)>();
             foreach (var file in matchingFiles)
             {
@@ -1914,7 +2032,7 @@ namespace Anoteitor
 
             if (foundOccurrences.Count > 0)
             {
-                Resultados resultWindow = new Resultados(this, foundOccurrences);
+                Resultados resultWindow = new Resultados(this, foundOccurrences, _cts);
                 resultWindow.StartPosition = FormStartPosition.CenterScreen;
                 resultWindow.Show();
             }
@@ -1923,12 +2041,6 @@ namespace Anoteitor
                 MessageBox.Show("Nenhuma ocorrência encontrada.", "Anoteitor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-        //private string ExtractDateFromFileName(string fileName)
-        //{
-        //    System.Text.RegularExpressions.Match match = System.Text.RegularExpressions.Regex.Match(fileName, @"\d{2}-\d{2}-\d{4}");
-        //    return match.Success ? match.Value : "Data desconhecida";
-        //}
 
         private string ShowInputDialog(string title, string promptText)
         {
@@ -1970,11 +2082,6 @@ namespace Anoteitor
             return dialogResult == DialogResult.OK ? textBox.Text : "";
         }
 
-        private void procurarPorTudoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Control + Alt + Shift F
-            int y = 0;
-        }
     }
 
     partial class cEscolhido

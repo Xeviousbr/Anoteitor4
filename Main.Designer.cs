@@ -311,7 +311,6 @@
             // 
             // procurarPorTudoToolStripMenuItem
             // 
-            this.procurarPorTudoToolStripMenuItem.Enabled = false;
             this.procurarPorTudoToolStripMenuItem.Name = "procurarPorTudoToolStripMenuItem";
             this.procurarPorTudoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
